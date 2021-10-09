@@ -22,6 +22,11 @@ public class Array {
         }
     }
 
+    public Object get(int index) {
+        if (index < 0 || index >= length) throw new IllegalArgumentException();
+        return array[index];
+    }
+
     @Override
     public String toString() {
         return "Array{" +

@@ -7,6 +7,6 @@ public class Main {
         array.add(1);
         array.add(2);
         array.add(3);
-        System.out.println(array);
+        System.out.println(array.get(0));
     }
 }
