@@ -27,6 +27,20 @@ public class Array {
         return array[index];
     }
 
+    public Object remove(int index) {
+        var deletedItem = array[index];
+        if (index < 0 || index >= length) throw new IllegalArgumentException();
+        var newArray = new Object[length - 1];
+        for(var i = 0; i < index; i++) {
+            newArray[i] = array[i];
+        }
+        for(var i = index; i < length - 1; i++) {
+            newArray[i] = array[i + 1];
+        }
+        array = newArray;
+        return deletedItem;
+    }
+
     @Override
     public String toString() {
         return "Array{" +
