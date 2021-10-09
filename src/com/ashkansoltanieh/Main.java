@@ -3,6 +3,10 @@ package com.ashkansoltanieh;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	    var array = new Array(2);
+        array.add(1);
+        array.add(2);
+        array.add(3);
+        System.out.println(array);
     }
 }
