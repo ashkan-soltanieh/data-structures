@@ -7,8 +7,12 @@ public class Main {
         array.add(1);
         array.add(2);
         array.add(3);
-        var deletedItem = array.remove(2);
+        array.add(9);
+        array.add(20);
         System.out.println(array);
-        System.out.println(deletedItem);
+        var deletedItem = array.remove(2);
+        array.remove(0);
+        array.remove(0);
+        System.out.println(array);
     }
 }

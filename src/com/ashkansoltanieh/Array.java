@@ -10,14 +10,15 @@ public class Array {
     public void add(Object obj) {
         if (currentIndex < length) {
             array[currentIndex] = obj;
-            currentIndex ++;
+            currentIndex++;
         }
         else {
             var newArray = new Object[length + 1];
             for(var i = 0; i < length; i++) {
                 newArray[i] = array[i];
             }
-            newArray[length++] = obj;
+            newArray[currentIndex++] = obj;
+            length++;
             array = newArray;
         }
     }
@@ -37,6 +38,7 @@ public class Array {
         for(var i = index; i < length - 1; i++) {
             newArray[i] = array[i + 1];
         }
+        length--;
         array = newArray;
         return deletedItem;
     }
