@@ -1,51 +1,42 @@
-package com.ashkansoltanieh;
+package com.ashkansoltanieh.linkedlist;
 
-import javax.management.OperationsException;
-import javax.management.RuntimeOperationsException;
-import javax.naming.OperationNotSupportedException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedList<T> {
     private Node<T> first; //head
     private Node<T> last; //tail
-    private List<T> list;
 
     public void addFirst(T value) {
         var node = new Node<T>(value);
-        if(list.size() == 0) {
-            list.add(value);
-            first = node;
-            last = node;
+        if(first == null) {
+            first = last = node;
             return;
         }
         node.setNext(first);
         first = node;
-        list.add(value);
     }
 
     public void addLast(T value) {
         var node = new Node<T>(value);
-        if(list.size() == 0) {
-            list.add(value);
+        if(first == null) {
             first = node;
             last = node;
             return;
         }
-        list.add(value);
         last.setNext(node);
         last = node;
     }
 
     public void deleteFirst() {
-        if(list.size() == 0) throw new NullPointerException();
+        if(first == null) throw new NullPointerException();
         Node<T> current = first;
         first = first.getNext();
         current.setNext(null);
     }
 
     public void deleteLast() {
-        if(list.size() == 0) throw new NullPointerException();
+        if(first == null) throw new NullPointerException();
         Node<T> current = first;
         while (current.getNext() != last) {
             current = current.getNext();
@@ -77,16 +68,12 @@ public class LinkedList<T> {
     }
 
     public void print() {
-        if (list.size() == 0) throw new NullPointerException();
+        if (first == null) throw new NullPointerException();
         Node<T> current = first;
         while (current.getNext() != null) {
             System.out.println(current);
             current = current.getNext();
         }
         System.out.println(last);
-    }
-
-    public LinkedList() {
-        this.list = new ArrayList<>();
     }
 }

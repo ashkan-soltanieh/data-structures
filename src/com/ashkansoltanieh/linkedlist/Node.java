@@ -1,6 +1,6 @@
-package com.ashkansoltanieh;
+package com.ashkansoltanieh.linkedlist;
 
-public class Node<T> {
+class Node<T> {
     private T value;
     private Node<T> next;
 
