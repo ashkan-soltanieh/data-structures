@@ -1,79 +1,105 @@
 package com.ashkansoltanieh.linkedlist;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class LinkedList<T> {
     private Node<T> first; //head
     private Node<T> last; //tail
+    private int size;
 
     public void addFirst(T value) {
         var node = new Node<T>(value);
-        if(first == null) {
+        if(first == null)
             first = last = node;
-            return;
+        else {
+            node.setNext(first);
+            first = node;
         }
-        node.setNext(first);
-        first = node;
+        size++;
     }
 
     public void addLast(T value) {
         var node = new Node<T>(value);
-        if(first == null) {
-            first = node;
+        if(first == null)
+            first = last = node;
+        else {
+            last.setNext(node);
             last = node;
-            return;
         }
-        last.setNext(node);
-        last = node;
+        size++;
     }
 
     public void deleteFirst() {
-        if(first == null) throw new NullPointerException();
-        Node<T> current = first;
-        first = first.getNext();
-        current.setNext(null);
+        if(first == null) throw new NoSuchElementException();
+        if(first.getNext() == null)
+            first = last = null;
+        else {
+            Node<T> current = first;
+            first = first.getNext();
+            current.setNext(null);
+        }
+        size--;
     }
 
     public void deleteLast() {
-        if(first == null) throw new NullPointerException();
-        Node<T> current = first;
-        while (current.getNext() != last) {
-            current = current.getNext();
+        if(first == null) throw new NoSuchElementException();
+        if(first.getNext() == null)
+            first = last = null;
+        else {
+            Node<T> oneBeforeLastNode = getOneBeforeLastNode();
+            last = oneBeforeLastNode;
+            last.setNext(null);
         }
-        last = current;
-        last.setNext(null);
+        size--;
+    }
+
+    private Node<T> getOneBeforeLastNode() {
+        Node<T> node = first;
+        while (node.getNext() != last) {
+            node = node.getNext();
+        }
+        return node;
     }
 
     public boolean contains(T value) {
-        Node<T> current = first;
-        if (first.getValue() == value || last.getValue() == value) return true;
-        while (current.getNext() != null) {
-            if (current.getValue() == value) return true;
-            current = current.getNext();
-        }
-        return false;
+        return indexOf(value) != -1;
     }
 
     public int indexOf(T value) {
         int index = 0;
         Node<T> current = first;
-        while (current.getNext() != null) {
+        while (current != null) {
             if (current.getValue() == value) return index;
             current = current.getNext();
             index++;
         }
-        if (last.getValue() == value) return index;
         return -1;
     }
 
     public void print() {
-        if (first == null) throw new NullPointerException();
+        if (first == null) System.out.println("List is empty!");;
         Node<T> current = first;
-        while (current.getNext() != null) {
+        while (current != null) {
             System.out.println(current);
             current = current.getNext();
         }
-        System.out.println(last);
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public List<T> toArray() {
+        Node<T> current = first;
+        var array = new ArrayList<T>();
+        while (current != null) {
+            array.add(current.getValue());
+            current = current.getNext();
+        }
+        return array;
     }
 }
