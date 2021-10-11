@@ -2,6 +2,8 @@ package com.ashkansoltanieh;
 
 import com.ashkansoltanieh.linkedlist.LinkedList;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -19,6 +21,7 @@ public class Main {
         list.print();
         System.out.println(list.contains(0));
         System.out.println(list.size());
-        System.out.println(list.toArray());
+        var array = list.toArray();
+        System.out.println(Arrays.toString(array));
     }
 }

@@ -93,11 +93,12 @@ public class LinkedList<T> {
         return size;
     }
 
-    public List<T> toArray() {
+    public Object[] toArray() {
         Node<T> current = first;
-        var array = new ArrayList<T>();
+        var array = new Object[size];
+        var index = 0;
         while (current != null) {
-            array.add(current.getValue());
+            array[index++] = (current.getValue());
             current = current.getNext();
         }
         return array;
