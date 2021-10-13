@@ -1,7 +1,5 @@
 package com.ashkansoltanieh.linkedlist;
 
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -81,7 +79,7 @@ public class LinkedList<T> {
     }
 
     public void print() {
-        if (first == null) System.out.println("List is empty!");;
+        if (first == null) System.out.println("List is empty!");
         Node<T> current = first;
         while (current != null) {
             System.out.println(current);
@@ -89,16 +87,40 @@ public class LinkedList<T> {
         }
     }
 
+    public void reverse() {
+        if (first == null) System.out.println("List is empty!");
+        var previous = first;
+        var current = previous.getNext();
+        while (current != null) {
+            var next = current.getNext();
+            current.setNext(previous);
+            previous = current;
+            current = next;
+        }
+        last = first;
+        last.setNext(null);
+        first = previous;
+    }
+
+    public Node<T> getKth(int fromEnd) {
+        if (fromEnd < 1 || fromEnd > size) throw new IllegalArgumentException();
+        var current = first;
+        for(var i = fromEnd; i < size; i++) {
+            current = current.getNext();
+        }
+        return current;
+    }
+
     public int size() {
         return size;
     }
 
     public Object[] toArray() {
-        Node<T> current = first;
         var array = new Object[size];
+        Node<T> current = first;
         var index = 0;
         while (current != null) {
-            array[index++] = (current.getValue());
+            array[index++] = current.getValue();
             current = current.getNext();
         }
         return array;

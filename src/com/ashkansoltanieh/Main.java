@@ -8,20 +8,17 @@ public class Main {
 
     public static void main(String[] args) {
 	    var list = new LinkedList<Integer>();
-        System.out.println(list.size());
-        list.addLast(1);
-        list.addLast(0);
-        list.addFirst(-1);
-        list.deleteLast();
-        list.deleteFirst();
-        list.print();
-        System.out.println(list.indexOf(20));
-        list.addLast(0);
-        list.addFirst(-1);
-        list.print();
-        System.out.println(list.contains(0));
-        System.out.println(list.size());
+        list.addLast(10);
+        list.addLast(20);
+        list.addLast(30);
+        list.addLast(40);
+        list.addLast(50);
+        list.addLast(60);
         var array = list.toArray();
         System.out.println(Arrays.toString(array));
+//        list.reverse();
+        var reversed = list.toArray();
+        System.out.println(Arrays.toString(reversed));
+        System.out.println(list.getKth(4));
     }
 }
