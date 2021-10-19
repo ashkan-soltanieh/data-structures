@@ -1,22 +1,22 @@
 package com.ashkansoltanieh;
 
+import com.ashkansoltanieh.queue.QueueReverser;
 import com.ashkansoltanieh.stack.Stack;
+
+import java.util.ArrayDeque;
+import java.util.Queue;
 
 public class Main {
 
     public static void main(String[] args) {
-	    var stack = new Stack<Integer>();
-        stack.push(1);
-        stack.push(2);
-        stack.push(3);
-        stack.push(4);
-        stack.push(5);
-        stack.push(6);
-        stack.push(7);
-        System.out.println(stack.isEmpty());
-        System.out.println(stack.peek());
-        System.out.println(stack.pop());
-        System.out.println(stack.isEmpty());
-        System.out.println(stack);
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.add(10);
+        queue.add(20);
+        queue.add(30);
+        System.out.println(queue.peek());
+        System.out.println(queue);
+        var reversed = new QueueReverser<>(queue);
+        reversed.reverse();
+        System.out.println(reversed);
     }
 }
