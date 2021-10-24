@@ -20,6 +20,53 @@ public class BinarySearchTree {
         return findNodeOrParent(value).value == value;
     }
 
+    public void traversePreOrder() {
+        traversePreOrder(root);
+    }
+
+    private void traversePreOrder(Node node) {
+        //base condition
+        if (node == null) return;
+
+        System.out.println(node.value);
+        traversePreOrder(node.leftChild);
+        traversePreOrder(node.rightChild);
+    }
+
+    public void traverseInOrder() {
+        traverseInOrder(root);
+    }
+
+    private void traverseInOrder(Node node) {
+        if (node == null) return;
+        traverseInOrder(node.leftChild);
+        System.out.println(node.value);
+        traverseInOrder(node.rightChild);
+    }
+
+    public void traversePostOrder() {
+        traversePostOrder(root);
+    }
+
+    private void traversePostOrder(Node node) {
+        if (node == null) return;
+        traversePostOrder(node.leftChild);
+        traversePostOrder(node.rightChild);
+        System.out.println(node.value);
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null) return -1;
+        if (node.leftChild == null && node.rightChild == null) return 1;
+        int left = height(node.leftChild);
+        int right = height(node.rightChild);
+        return Math.max(left, right) + 1;
+    }
+
     private Node findNodeOrParent(int value) {
         var current = root;
         while (current != null) {
