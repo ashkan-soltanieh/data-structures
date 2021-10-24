@@ -61,10 +61,21 @@ public class BinarySearchTree {
 
     private int height(Node node) {
         if (node == null) return -1;
-        if (node.leftChild == null && node.rightChild == null) return 1;
+        if (node.leftChild == null && node.rightChild == null) return 0;
         int left = height(node.leftChild);
         int right = height(node.rightChild);
         return Math.max(left, right) + 1;
+    }
+
+    public int minimum() {
+        return minimum(root);
+    }
+
+    private int minimum(Node node) {
+        if(node.leftChild == null && node.rightChild == null) return node.value;
+        var left = minimum(node.leftChild);
+        var right = minimum(node.rightChild);
+        return Math.min(Math.min(left, right), node.value);
     }
 
     private Node findNodeOrParent(int value) {
