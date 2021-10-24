@@ -1,6 +1,6 @@
 package com.ashkansoltanieh.binarytrees;
 
-public class BinarySearchTree {
+public class BinaryTree {
     private Node root;
 
     public void insert(int value) {
@@ -67,6 +67,22 @@ public class BinarySearchTree {
         return Math.max(left, right) + 1;
     }
 
+    public boolean equals(BinaryTree other) {
+        if (other == null) throw new IllegalStateException();
+        return equals(this.root, other.root);
+    }
+
+    private boolean equals(Node first, Node second) {
+        if (first == null && second == null) return true;
+        if (first != null && second != null) {
+            var isValuesEqual  = first.value == second.value;
+            var isLeftEqual = equals(first.leftChild, second.leftChild);
+            var isRightEqual = equals(first.rightChild, second.rightChild);
+            return isLeftEqual && isRightEqual && isValuesEqual;
+        }
+        return false;
+    }
+
     public int minimum() {
         return minimum(root);
     }
@@ -96,4 +112,6 @@ public class BinarySearchTree {
         }
         return null;
     }
+
+
 }
