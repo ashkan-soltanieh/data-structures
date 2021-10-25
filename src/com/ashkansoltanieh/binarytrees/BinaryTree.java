@@ -113,5 +113,22 @@ public class BinaryTree {
         return null;
     }
 
+    public void swapRoot() {
+        var temp = root.leftChild;
+        root.leftChild = root.rightChild;
+        root.rightChild = root.leftChild;
+    }
 
+    public boolean isBinarySearchTree() {
+        return isNodeInRange(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isNodeInRange(Node node, int min, int max) {
+        if (node == null) return true;
+        var isValueInRange = node.value > min && node.value < max;
+        if (!isValueInRange) return false;
+        var isRightInRange = isNodeInRange(node.rightChild, node.value + 1, max);
+        var isLeftInRange = isNodeInRange(node.leftChild, min, node.value -1);
+        return isRightInRange && isLeftInRange;
+    }
 }
