@@ -1,5 +1,8 @@
 package com.ashkansoltanieh.binarytrees;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BinaryTree {
     private Node root;
 
@@ -116,7 +119,7 @@ public class BinaryTree {
     public void swapRoot() {
         var temp = root.leftChild;
         root.leftChild = root.rightChild;
-        root.rightChild = root.leftChild;
+        root.rightChild = temp;
     }
 
     public boolean isBinarySearchTree() {
@@ -125,10 +128,36 @@ public class BinaryTree {
 
     private boolean isNodeInRange(Node node, int min, int max) {
         if (node == null) return true;
-        var isValueInRange = node.value > min && node.value < max;
-        if (!isValueInRange) return false;
+        if (node.value < min || node.value > max) return false;
         var isRightInRange = isNodeInRange(node.rightChild, node.value + 1, max);
         var isLeftInRange = isNodeInRange(node.leftChild, min, node.value -1);
         return isRightInRange && isLeftInRange;
+    }
+
+    public List<Integer> getNodesAtDistance(int distance) {
+        var list = new ArrayList<Integer>();
+        getNodesAtDistance(root, distance, list);
+        return list;
+    }
+
+    private void getNodesAtDistance(Node node, int distance, List<Integer> list) {
+        if (node == null) return;
+        if (distance-- == 0) {
+            list.add(node.value);
+            return;
+        }
+        getNodesAtDistance(node.leftChild, distance, list);
+        getNodesAtDistance(node.rightChild, distance, list);
+    }
+
+    public int sum() {
+        return sum(root);
+    }
+
+    private int sum(Node node) {
+        if (node == null) return 0;
+        var left = sum(node.leftChild);
+        var right = sum(node.rightChild);
+        return (left + right + node.value);
     }
 }
